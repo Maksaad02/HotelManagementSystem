@@ -1,0 +1,77 @@
+﻿@model HotelManagementSystem.Models.Invoice
+
+<!DOCTYPE html>
+<html>
+<head>
+    <meta charset="utf-8" />
+    <title>Invoice Print</title>
+    <style>
+        body {
+            font-family: Arial, sans-serif;
+            margin: 20px;
+        }
+        .invoice-header {
+            text-align: center;
+            margin-bottom: 20px;
+        }
+        .invoice-details, .booking-details {
+            width: 100%;
+            margin-bottom: 20px;
+            border-collapse: collapse;
+        }
+        .invoice-details th, .invoice-details td,
+        .booking-details th, .booking-details td {
+            border: 1px solid #ddd;
+            padding: 8px;
+        }
+        .invoice-details th, .booking-details th {
+            background-color: #f2f2f2;
+            text-align: left;
+        }
+        .text-right {
+            text-align: right;
+        }
+        .text-center {
+            text-align: center;
+        }
+    </style>
+</head>
+<body>
+    <div class="invoice-header">
+        <h1>Invoice</h1>
+        <p>Invoice ID: @Model.Id</p>
+        <p>Date: @Model.InvoiceDate.ToShortDateString()</p>
+    </div>
+
+    <table class="invoice-details">
+        <tr>
+            <th>Guest Name</th>
+            <td>@Model.Bookings.Guests.FirstName @Model.Bookings.Guests.LastName</td>
+        </tr>
+        <tr>
+            <th>Room Number</th>
+            <td>@Model.Bookings.Rooms.RoomNumber</td>
+        </tr>
+        <tr>
+            <th>Check-In</th>
+            <td>@Model.Bookings.CheckInDate.ToShortDateString()</td>
+        </tr>
+        <tr>
+            <th>Check-Out</th>
+            <td>@Model.Bookings.CheckOutDate.ToShortDateString()</td>
+        </tr>
+        <tr>
+            <th>Total Amount</th>
+            <td>@Model.TotalAmount.ToString("C")</td>
+        </tr>
+        <tr>
+            <th>Payment Status</th>
+            <td>@Model.PaymentStatus</td>
+        </tr>
+    </table>
+
+    <div class="text-center">
+        <button onclick="window.print()">Print Invoice</button>
+    </div>
+</body>
+</html>
